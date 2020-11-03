@@ -1,3 +1,80 @@
 import comidas.*
 import comensales.*
 import cocina.*
+
+test "comidas"{
+	
+	const carne1 = new HamburguesasDeCarne( panQueTiene = panCasero , esAptoVegetariano = false)
+	
+	assert.equals( 80 , carne1.valoracion())
+	
+	const vegetariana1 = new HamburguesasVegetarianas(panQueTiene = panDeMasaMadre ,deQueLegumbreEstaHecha = "garbanzos" , esAptoVegetariano = true)
+	
+	assert.equals( 122 , vegetariana1.valoracion())
+	
+	const provo = new Provoleta(peso = 190 , tieneEspecias = true, esAptoVegetariano = true)
+	
+	assert.that(provo.esEspecial())
+	
+	const asado = new Cortes( nombre = "asado" , calidad = 10 , peso = 250)
+	const entrania = new Cortes( nombre = "entrania" , calidad = 7 , peso = 200)
+	const chorizo = new Cortes( nombre = "chorizo" , calidad = 8 , peso = 50)
+	
+	const parrillada1 = new Parillada()
+	parrillada1.agregar(asado)
+	parrillada1.agregar(entrania)
+	parrillada1.agregar(chorizo)
+	
+	assert.equals(147 , parrillada1.valoracion())
+	
+}
+
+test "comensales" {
+	
+	
+	const vege1 = new Vegetariano(peso = 68500)
+	
+	const provo2 = new Provoleta(peso = 190 , tieneEspecias = true, esAptoVegetariano = true)
+	const vegetariana2 = new HamburguesasVegetarianas(panQueTiene = panDeMasaMadre ,deQueLegumbreEstaHecha = "garbanzos" , esAptoVegetariano = true)
+	const vegetariana3 = new HamburguesasVegetarianas(panQueTiene = panDeMasaMadre ,deQueLegumbreEstaHecha = "garbanzos" , esAptoVegetariano = true)
+	
+	vege1.comer(provo2)
+	vege1.comer(vegetariana2)
+	vege1.comer(vegetariana3)
+	
+	assert.that(vege1.satisfecho())
+	
+	
+	const popular = new HambrePopular(peso = 85000)
+	
+	const asado2 = new Cortes( nombre = "asado" , calidad = 10 , peso = 250)
+	const entrania2 = new Cortes( nombre = "entrania" , calidad = 7 , peso = 200)
+	const chorizo2 = new Cortes( nombre = "chorizo" , calidad = 8 , peso = 50)
+	
+	popular.comer(asado2)
+	popular.comer(entrania2)
+	popular.comer(chorizo2)
+	
+	assert.that( not popular.satisfecho())
+	
+	const paladar = new DePaladarFino()
+
+	const carne2 = new HamburguesasDeCarne( panQueTiene = panDeMasaMadre , esAptoVegetariano = false)
+	
+	assert.that( paladar.leAgrada(carne2))
+	
+	const carne3 = new HamburguesasDeCarne( panQueTiene = panCasero , esAptoVegetariano = false)
+	
+	assert.that( not paladar.leAgrada(carne3))
+	
+	
+	
+	
+	
+	
+}
+
+
+
+
+
